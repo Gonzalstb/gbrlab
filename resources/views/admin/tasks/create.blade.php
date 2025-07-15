@@ -30,7 +30,7 @@
                             </div>
                             <div class="col">
                                 <label for="estimated_time" class="form-label">@lang('Tiempo estimado (h)')</label>
-                                <input type="number" class="form-control" id="estimated_time" name="estimated_time" min="0">
+                                <input type="number" class="form-control" id="estimated_time" name="estimated_time" min="0" placeholder="@lang('No especificado')">
                             </div>
                         </div>
                         <div class="row mb-3">

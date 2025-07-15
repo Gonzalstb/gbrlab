@@ -20,8 +20,8 @@
                 <div class="card-body pt-2">
                     <div class="row">
                         <div class="col-8">
-                            <p class="mb-1"><strong>Tiempo estimado:</strong> 3h</p>
-                            <p class="mb-1"><strong>Tiempo gastado:</strong> 1h 30m</p>
+                            <p class="mb-1"><strong>Tiempo estimado:</strong> {{ isset($task) && $task->estimated_time !== null ? $task->estimated_time . 'h' : __('No especificado') }}</p>
+                            <p class="mb-1"><strong>Tiempo gastado:</strong> {{ isset($task) && $task->spent_time !== null ? $task->spent_time . 'h' : __('No especificado') }}</p>
                             <p class="mb-1"><strong>Asignado a:</strong> Juan Pérez</p>
                         </div>
                         <div class="col-4 text-end">

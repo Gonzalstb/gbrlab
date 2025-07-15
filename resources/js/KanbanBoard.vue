@@ -32,6 +32,10 @@
                         <i class="bi bi-person-circle"></i> {{ element.assigned_to.name }}
                       </span>
                     </div>
+                    <div class="mb-1">
+                      <small class="text-muted">Tiempo estimado: {{ element.estimated_time !== null && element.estimated_time !== undefined && element.estimated_time !== '' ? element.estimated_time + 'h' : 'No especificado' }}</small><br>
+                      <small class="text-muted">Tiempo gastado: {{ element.spent_time !== null && element.spent_time !== undefined && element.spent_time !== '' ? element.spent_time + 'h' : 'No especificado' }}</small>
+                    </div>
                     <div>
                       <small class="text-muted">{{ element.description }}</small>
                     </div>

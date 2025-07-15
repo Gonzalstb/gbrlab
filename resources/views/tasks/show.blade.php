@@ -18,8 +18,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-8">
-                            <p><strong>@lang('Tiempo estimado:')</strong> {{ $task->estimated_time ?? '3h' }}</p>
-                            <p><strong>@lang('Tiempo gastado:')</strong> {{ $task->spent_time ?? '1h 30m' }}</p>
+                            <p><strong>@lang('Tiempo estimado:')</strong> {{ $task->estimated_time !== null ? $task->estimated_time . 'h' : __('No especificado') }}</p>
+                            <p><strong>@lang('Tiempo gastado:')</strong> {{ $task->spent_time !== null ? $task->spent_time . 'h' : __('No especificado') }}</p>
                             <p><strong>@lang('Asignado a:')</strong> {{ $task->assignedTo->name ?? 'Juan Pérez' }}</p>
                         </div>
                         <div class="col-4 text-end">

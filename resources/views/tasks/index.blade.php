@@ -23,11 +23,11 @@
                             <div class="card-body pt-2 text-center">
                                 <div class="fw-bold mb-2">{{ $task->title }}</div>
                                 <div class="text-muted small">{{ __('Asignado a:') }} {{ $task->assignedTo->name ?? '-' }}</div>
-                            </div>
+                    </div>
                             <div class="card-footer bg-transparent border-0 text-end pt-0">
                                 <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-primary btn-sm rounded-pill px-3">{{ __('Ver') }}</a>
                                 <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-secondary btn-sm rounded-pill px-3">{{ __('Editar') }}</a>
-                            </div>
+                </div>
                         </div>
                     @empty
                         <div class="text-center text-white-50 small">{{ __('Sin tareas') }}</div>

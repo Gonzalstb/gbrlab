@@ -11,30 +11,30 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
-                        <tr>
-                            <th>@lang('ID')</th>
-                            <th>@lang('Nombre')</th>
-                            <th>@lang('Email')</th>
-                            <th>@lang('Rol')</th>
-                            <th>@lang('Acciones')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Ejemplo de usuario --}}
-                        <tr>
-                            <td>1</td>
-                            <td>Administrador</td>
-                            <td>admin@test.com</td>
-                            <td><span class="badge bg-primary">Admin</span></td>
-                            <td>
+                    <tr>
+                        <th>@lang('ID')</th>
+                        <th>@lang('Nombre')</th>
+                        <th>@lang('Email')</th>
+                        <th>@lang('Rol')</th>
+                        <th>@lang('Acciones')</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- Ejemplo de usuario --}}
+                    <tr>
+                        <td>1</td>
+                        <td>Administrador</td>
+                        <td>admin@test.com</td>
+                        <td><span class="badge bg-primary">Admin</span></td>
+                        <td>
                                 <a href="#" class="btn btn-sm btn-info rounded-pill px-3">@lang('Ver')</a>
                                 <a href="#" class="btn btn-sm btn-warning rounded-pill px-3">@lang('Editar')</a>
                                 <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">@lang('Eliminar')</a>
-                            </td>
-                        </tr>
-                        {{-- Fin ejemplo --}}
-                    </tbody>
-                </table>
+                        </td>
+                    </tr>
+                    {{-- Fin ejemplo --}}
+                </tbody>
+            </table>
             </div>
         </div>
     </div>

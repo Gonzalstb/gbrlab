@@ -13,6 +13,8 @@ class Task extends Model
         'status',
         'user_id',
         'assigned_to',
+        'estimated_time',
+        'spent_time',
     ];
 
     public function user()

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Task;
+use App\Models\User;
 
 class TaskController extends Controller
 {
@@ -44,7 +46,9 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $users = User::all();
+        return view('admin.tasks.edit', compact('task', 'users'));
     }
 
     /**
@@ -52,7 +56,16 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'assigned_to' => 'required|exists:users,id',
+            'priority' => 'required',
+            'estimated_time' => 'nullable|integer|min:0',
+            'spent_time' => 'nullable|integer|min:0',
+        ]);
+        $task = Task::findOrFail($id);
+        $task->update($validated);
+        return redirect()->route('admin.tasks.index')->with('success', __('Tarea actualizada correctamente.'));
     }
 
     /**

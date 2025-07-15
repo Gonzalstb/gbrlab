@@ -36,10 +36,10 @@
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
                                 <button class="dropdown-item" type="submit">{{ __('Cerrar sesión') }}</button>
-                            </form>
+                        </form>
                         </li>
                     </ul>
                 </li>

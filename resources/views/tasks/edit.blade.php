@@ -31,7 +31,11 @@
                             </div>
                             <div class="col">
                                 <label for="estimated_time" class="form-label">@lang('Tiempo estimado (h)')</label>
-                                <input type="number" class="form-control rounded-pill" id="estimated_time" name="estimated_time" min="0" value="{{ $task->estimated_time ?? '' }}">
+                                <input type="number" class="form-control rounded-pill" id="estimated_time" name="estimated_time" min="0" value="{{ old('estimated_time', $task->estimated_time ?? '') }}">
+                            </div>
+                            <div class="col">
+                                <label for="spent_time" class="form-label">@lang('Tiempo gastado (h)')</label>
+                                <input type="number" class="form-control rounded-pill" id="spent_time" name="spent_time" min="0" value="{{ old('spent_time', $task->spent_time ?? '') }}">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -39,7 +43,9 @@
                                 <label for="assigned_to" class="form-label">@lang('Asignar a')</label>
                                 <select class="form-select rounded-pill" id="assigned_to" name="assigned_to" required>
                                     <option value="">@lang('Selecciona un usuario')</option>
-                                    {{-- Aquí irán los usuarios --}}
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}" @if(($task->assigned_to ?? '') == $user->id) selected @endif>{{ $user->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('assigned_to')
                                     <div class="text-danger small mt-1">{{ $message }}</div>
