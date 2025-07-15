@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: 172.17.0.1
+      PMA_USER: admin
+      PMA_PASSWORD: Test1111
+    ports:
+      - "8080:80" 
