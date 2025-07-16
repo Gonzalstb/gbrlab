@@ -1,13 +1,59 @@
 version: '3.8'
 
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Test1111
+      MYSQL_DATABASE: gbrlab
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel
+    restart: always
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9000:9000"
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=gbrlab
+      - DB_USERNAME=root
+      - DB_PASSWORD=Test1111
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     restart: always
     environment:
-      PMA_HOST: 172.17.0.1
-      PMA_USER: admin
+      PMA_HOST: mysql
+      PMA_USER: root
       PMA_PASSWORD: Test1111
     ports:
-      - "8080:80" 
+      - "8080:80"
+    depends_on:
+      - mysql
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: always
+    ports:
+      - "8025:8025"
+    environment:
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
+
+volumes:
+  db_data: 
