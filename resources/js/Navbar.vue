@@ -2,8 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-3">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" class="bi bi-book" viewBox="0 0 16 16">
-          <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893C5.998 1.797 7.354 2 8 2s2.002-.203 3.612-.065c1.234.124 2.503.523 3.388.893V14c-.885.37-2.154.769-3.388.893C10.002 14.203 8.646 14 8 14s-2.002.203-3.612.065C3.154 13.936 1.885 13.537 1 13.167V2.828zM8 1c-.668 0-2.042.2-3.682.37C2.07 1.57 1 2.07 1 2.828v10.339c0 .758 1.07 1.258 3.318 1.458C5.958 14.8 7.332 15 8 15s2.042-.2 3.682-.37C13.93 14.43 15 13.93 15 13.172V2.828c0-.758-1.07-1.258-3.318-1.458C10.042 1.2 8.668 1 8 1z"/>
+        <!-- Icono Bootstrap grid -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" class="bi bi-grid" viewBox="0 0 16 16">
+          <path d="M2 2h3v3H2V2zm4 0h3v3H6V2zm4 0h3v3h-3V2zM2 6h3v3H2V6zm4 0h3v3H6V6zm4 0h3v3h-3V6zM2 10h3v3H2v-3zm4 0h3v3H6v-3zm4 0h3v3h-3v-3z"/>
         </svg>
         <span class="fw-bold fs-4 text-white">Team Tasks</span>
       </a>
@@ -13,10 +14,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link text-white" href="/dashboard">Dashboard</a>
+            <a class="nav-link text-white" href="/dashboard">{{ t('dashboard') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="/tasks">Tareas</a>
+            <a class="nav-link text-white" href="/tasks">{{ t('tasks') }}</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-2">
@@ -35,9 +36,9 @@
               <img :src="userAvatar" class="rounded-circle" alt="avatar" width="32" height="32" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="/profile/edit">Perfil</a></li>
+              <li><a class="dropdown-item" href="/profile/edit">{{ t('profile') }}</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#" @click.prevent="logout">Cerrar sesión</a></li>
+              <li><a class="dropdown-item" href="#" @click.prevent="logout">{{ t('logout') }}</a></li>
             </ul>
           </li>
         </ul>
@@ -51,10 +52,28 @@ import { ref } from 'vue';
 const userName = ref(window.Laravel?.user?.name || 'Invitado');
 const userAvatar = ref(`https://ui-avatars.com/api/?name=${encodeURIComponent(userName.value)}&background=1e3a5c&color=fff&size=32`);
 const currentLocale = ref(window.Laravel?.locale || 'es');
+const translations = ref(window.Laravel?.translations || {});
 
-function setLocale(locale) {
-  window.location.href = `/locale/${locale}`;
+function t(key) {
+  return translations.value[key] || key;
 }
+
+async function setLocale(locale) {
+  if (currentLocale.value === locale) return;
+  try {
+    const res = await fetch(`/locale/${locale}?json=1`);
+    if (res.ok) {
+      const data = await res.json();
+      currentLocale.value = data.locale;
+      translations.value = data.translations;
+    } else {
+      window.location.href = `/locale/${locale}`;
+    }
+  } catch (e) {
+    window.location.href = `/locale/${locale}`;
+  }
+}
+
 function logout() {
   const form = document.createElement('form');
   form.method = 'POST';
@@ -67,7 +86,7 @@ function logout() {
   document.body.appendChild(form);
   form.submit();
 }
-</script>
+</script> 
 
 <style scoped>
 .navbar {

@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container py-4">
-    <h1 class="mb-4 fw-bold text-white text-center display-5">{{ __('Tareas') }}</h1>
+    <h1 class="mb-4 fw-bold text-white text-center display-5">{{ __('messages.tasks') }}</h1>
     @php
         $statuses = [
-            'to do' => __('To Do'),
-            'in progress' => __('In Progress'),
-            'doing' => __('Doing'),
-            'testing' => __('Testing'),
-            'done' => __('Done'),
+            'to do' => __('messages.to_do'),
+            'in progress' => __('messages.in_progress'),
+            'doing' => __('messages.doing'),
+            'testing' => __('messages.testing'),
+            'done' => __('messages.done'),
         ];
     @endphp
     <div class="d-flex justify-content-center align-items-start flex-nowrap overflow-auto" style="gap: 1.5rem;">
@@ -22,15 +22,15 @@
                         <div class="card h-100 shadow-lg border-0 rounded-4 mb-3">
                             <div class="card-body pt-2 text-center">
                                 <div class="fw-bold mb-2">{{ $task->title }}</div>
-                                <div class="text-muted small">{{ __('Asignado a:') }} {{ $task->assignedTo->name ?? '-' }}</div>
+                                <div class="text-muted small">{{ __('messages.assigned_to') }} {{ $task->assignedTo->name ?? '-' }}</div>
                     </div>
                             <div class="card-footer bg-transparent border-0 text-end pt-0">
-                                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-primary btn-sm rounded-pill px-3">{{ __('Ver') }}</a>
-                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-secondary btn-sm rounded-pill px-3">{{ __('Editar') }}</a>
+                                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-primary btn-sm rounded-pill px-3">{{ __('messages.view') }}</a>
+                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-secondary btn-sm rounded-pill px-3">{{ __('messages.edit') }}</a>
                 </div>
                         </div>
                     @empty
-                        <div class="text-center text-white-50 small">{{ __('Sin tareas') }}</div>
+                        <div class="text-center text-white-50 small">{{ __('messages.no_tasks') }}</div>
                     @endforelse
                 </div>
             </div>

@@ -31,6 +31,13 @@ Route::get('/locale/{locale}', function ($locale) {
         session(['locale' => $locale]);
         app()->setLocale($locale);
     }
+    if (request()->has('json')) {
+        $messages = include base_path('lang/' . app()->getLocale() . '/messages.php');
+        return response()->json([
+            'locale' => app()->getLocale(),
+            'translations' => $messages,
+        ]);
+    }
     return back();
 })->name('locale.set');
 

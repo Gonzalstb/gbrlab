@@ -24,11 +24,16 @@
         }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php
+        $messages = include base_path('lang/' . app()->getLocale() . '/messages.php');
+        $laravelPayload = [
+            'user'         => Auth::user(),
+            'locale'       => app()->getLocale(),
+            'translations' => $messages,
+        ];
+    @endphp
     <script>
-        window.Laravel = {
-            user: @json(Auth::user()),
-            locale: '{{ app()->getLocale() }}'
-        };
+        window.Laravel = @json($laravelPayload);
     </script>
     </head>
     <body class="font-sans antialiased">
