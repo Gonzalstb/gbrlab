@@ -63,9 +63,8 @@ async function setLocale(locale) {
   try {
     const res = await fetch(`/locale/${locale}?json=1`);
     if (res.ok) {
-      const data = await res.json();
-      currentLocale.value = data.locale;
-      translations.value = data.translations;
+      // Recargar toda la página para aplicar el idioma globalmente
+      window.location.reload();
     } else {
       window.location.href = `/locale/${locale}`;
     }
