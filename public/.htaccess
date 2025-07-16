@@ -5,16 +5,30 @@
 
     RewriteEngine On
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-    # Handle Front Controller...
+    # Redirige todas las peticiones que no sean archivos o carpetas reales a index.php
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # Opcional: fuerza HTTPS (descomenta si tu hosting tiene SSL)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
+
+# Seguridad: bloquea acceso a archivos sensibles
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+<Files composer.json>
+    Order allow,deny
+    Deny from all
+</Files>
+<Files composer.lock>
+    Order allow,deny
+    Deny from all
+</Files>
+<Files artisan>
+    Order allow,deny
+    Deny from all
+</Files>
